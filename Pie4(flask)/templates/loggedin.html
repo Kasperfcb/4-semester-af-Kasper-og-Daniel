@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filer på netværksdrevet</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        body {
+            position: relative;
+        }
+
+        ul {
+            list-style-type: none; 
+            padding: 0; 
+            text-align: center; 
+        }
+
+        ul li {
+            display: inline-block; 
+            margin: 0 10px; 
+            font-size: 40px; 
+        }
+
+        nav {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/logout">Log ud</a>
+    </nav>
+    <header>
+        <h1>Filer på netværksdrevet</h1>
+        <p>Du er logget ind som, {{ username }}</p>
+    </header>
+    <div>
+        <ul>
+            {% for folder in folders %}
+                <li>
+                    <a href="/folder/{{ folder }}">{{ folder|capitalize }}</a>
+                    
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mappe Indhold</title>
+    <link rel="stylesheet" href="/static/styles.css"> 
+    <link rel="stylesheet" href="/static/folder_styles.css"> 
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .logout form {
+            margin-left: auto; 
+        }
+
+        .folders,
+        .files,
+        .upload-file,
+        .upload-zip,
+        .back-link {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section class="header">
+            <h1>Indholdet af mappen "{{ current_folder }}"</h1>
+            <section class="logout">
+                <h2>Log ud:</h2>
+                <form action="/logout" method="post">
+                    <input type="submit" value="Log ud">
+                </form>
+            </section>
+        </section>
+        
+        <section class="folders">
+            <h2>Mapper:</h2>
+            <ul>
+                {% for folder in folders %}
+                    <li>
+                        <a href="/folder/{{ current_folder }}/{{ folder }}">{{ folder }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section class="files">
+            <h2>Filer:</h2>
+            <ul>
+                {% for file in files %}
+                    <li>
+                        <a href="/download/{{ current_folder }}/{{ file }}">{{ file }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section class="upload-file">
+            <h2>Upload fil:</h2>
+            <form action="/upload/{{ current_folder }}" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" required>
+                <input type="submit" value="Upload">
+            </form>
+        </section>
+
+        <section class="upload-zip">
+            <h2>Upload en zip-mappe:</h2>
+            <form action="/upload_zip/{{ current_folder }}" method="post" enctype="multipart/form-data">
+                <input type="file" name="zip_file" accept=".zip" required>
+                <input type="submit" value="Upload Zip Mappe">
+            </form>
+        </section>
+
+        <section class="back-link">
+            <a href="/loggedin">Tilbage til oversigten</a>
+        </section>
+    </div>
+</body>
+</html>

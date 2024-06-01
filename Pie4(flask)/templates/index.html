@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kasper og Daniel filserver</title>
+    <link rel="stylesheet" href="/static/styles.css"> 
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section class="header">
+            <h1>Kasper og Daniel filserver</h1>
+        </section>
+        
+        <section class="signup">
+            <h2>Opret dig her</h2>
+            <form action="/signup" method="post">
+                <label for="signup-username">Brugernavn:</label>
+                <input type="text" id="signup-username" name="username" required><br><br>
+                <label for="signup-password">Adganskode:</label>
+                <input type="password" id="signup-password" name="password" required><br><br>
+                {% if error_signup %}
+                    <p class="error">{{ error_signup }}</p>
+                {% endif %}
+                <input type="submit" value="Opret">
+            </form>
+        </section>
+
+        <section class="login">
+            <h2>Log ind</h2>
+            <form action="/login" method="post">
+                <label for="login-username">Brugernavn:</label>
+                <input type="text" id="login-username" name="username" required><br><br>
+                <label for="login-password">Adganskode:</label>
+                <input type="password" id="login-password" name="password" required><br><br>
+                {% if error_login %}
+                    <p class="error">{{ error_login }}</p>
+                {% endif %}
+                <input type="submit" value="Log ind">
+            </form>
+        </section>
+    </div>
+</body>
+</html>
